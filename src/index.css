@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  margin: 0;
+  font-family: 'Fredoka', sans-serif;
+}
+
+.full{
+  width: 100%;
+}
+
+.del:hover {
+  background-color: #b91c1c;
+}
