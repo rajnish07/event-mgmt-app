@@ -70,7 +70,7 @@ function Item({ item, addToCart }) {
             <h1>Note to the Kitchen</h1>
             <div className="flex grow w-full">
                 <input type="text" placeholder="add a note...." value={product.note} onChange={(e) => setProduct({...product, note: e.target.value})} className="w-3/4 mr-4 shadow-md outline-none rounded-md h-12 px-4" />
-                <button className={`${product.qnty === 0 ? 'bg-gray-300' : 'bg-blue-600'} w-1/4 font-bold text-white px-3 rounded-md`} onClick={handleAddToCart} disabled={product.qnty == 0}>Add to Cart</button>
+                <button className={`${product.qnty === 0 ? 'bg-gray-300' : 'bg-blue-600'} w-1/4 font-bold text-white px-3 rounded-md`} onClick={handleAddToCart} disabled={product.qnty === 0}>Add to Cart</button>
             </div>
         </div>
     </div>
