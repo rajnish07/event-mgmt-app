@@ -1,6 +1,6 @@
-function CartItem({item}){
+function CartItem({item, remove}){
     const removeFromCart = () => {
-        console.log(item)
+        remove(item)
     }
 
     return <div className="w-full flex-col shadow-md py-2 px-2">
@@ -14,7 +14,12 @@ function CartItem({item}){
             <span className="w-4/5"></span>
             <span className="my-2 float-right">${item.amount}</span>
         </div>
-        {item.addOn && (<div></div>)}
+        {item.addOns && (<div className="w-full px-3">
+            <h1 className="font-bold">Add On's</h1>
+            <ul>
+            {item.addOns.map(addOn => <li key={addOn}>{addOn}</li>)}
+            </ul>
+        </div>)}
         </div>
 } 
 

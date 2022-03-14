@@ -24,7 +24,27 @@ function Item({ item, addToCart }) {
 
     const handleAddToCart = () => {
         addToCart(product)
+        setProduct({
+            id: item.foodid,
+            name: item.foodname,
+            qnty: 0,
+            amount: 0,
+            note: "",
+            session: "BreakFast",
+            image: item.imageurl,
+            addOns: []
+        })
+        setStatus(!status)
     }
+
+    const handleAddOn = (e) => {
+        if(e.target.checked){
+            setProduct({...product, addOns: [...product.addOns, e.target.value]})
+        }
+        else {
+            setProduct({...product, addOns: product.addOns.filter(item => item !== e.target.value)})
+        }
+    } 
 
     return <div className="my-8 px-2 py-4 shadow-md rounded-md">
         <div className="flex">
@@ -43,8 +63,8 @@ function Item({ item, addToCart }) {
                     <button className="text-blue-600 float-right font-bold" onClick={() => setStatus(!status)}>Cancel</button>
                     </div>
                     <hr />
-                    {item.submenu?.map(smenu => <div className="flex w-full items-center">
-                        <input type="checkbox" value={smenu} className="bg-blue-500"/>
+                    {item.submenu?.map((smenu, index) => <div key={index} className="flex w-full items-center">
+                        <input type="checkbox" onChange={handleAddOn} value={smenu} className="bg-blue-600"/>
                     <span className="w-3/4 mx-4">{smenu}</span>
                 </div>)}</div>)}
             </div>
@@ -56,10 +76,10 @@ function Item({ item, addToCart }) {
                 <input type="number" placeholder="Qty" value={product.qnty} onChange={handleChange} className={`outline-none shadow-md w-full px-4 rounded-md h-12${qntyErr ? ' text-red-500' : ''}`} />
             </div>
             <div className="w-2/4 mr-2">
-                <h1 >Session</h1>
+                { item.category === "Consumables" ? <><h1 >Session</h1>
                 <select className="outline-none w-full shadow-md rounded-md h-12 px-4" onChange={(e) => {setProduct({...product, session: e.target.selectedOptions[0].value})}}>
                     {item.sessionlist.map((sessionItem, index) => <option key={index} value={sessionItem}>{sessionItem}</option>)}
-                </select>
+                </select></> : null}
             </div>
             <div className="w-1/4">
                 <h1 >Sub Total</h1>
